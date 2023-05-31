@@ -9,60 +9,66 @@ namespace BankApplication {
     /// BankApplication contains most of the methods for the actual project
     /// </summary>
 
-    internal class BankSystem {
+    public class BankSystem {
 
-        public static void OpenAccount(Customer customer) {
+        public static void OpenAccount(Customer customer, string newAccChoice, string curchoice) {
 
-            Console.WriteLine("What do you want to name your new account(between 4 and 20 characters)");
 
-            while (true) {
+            //Console.WriteLine("What do you want to name your new account(between 4 and 20 characters)");
 
-                string newAccChoice = Console.ReadLine();
+            //while (true) {
 
-                //A character limit between 4-20
-                if (newAccChoice.Length > 20 || newAccChoice.Length < 4)
-                    Console.WriteLine("The account name needs to be between 4 and 20 characters");
+            //newAccChoice = Console.ReadLine();
 
-                //Check if the account name already exists
-                else if (customer.accounts.ContainsKey(newAccChoice))
-                    Console.WriteLine("This account already exists for this user");
+            //A character limit between 4-20
+            //if (newAccChoice.Length > 20 || newAccChoice.Length < 4)
+            //    Console.WriteLine("The account name needs to be between 4 and 20 characters");
 
-                else {
+            //Check if the account name already exists
+            /*else */if (customer.accounts.ContainsKey(newAccChoice))
+                Console.WriteLine("This account already exists for this user");
 
-                    while (true) {
+            else
+            {
 
-                        Console.WriteLine("Which currency do you want to use? \n Available types of currency:\n kr \n $");
-                        string curchoice = Console.ReadLine();
 
-                        //Check if the currency is either kr or $ and make it lower case
-                        if (curchoice.ToLower() == "kr" || curchoice == "$") {
 
-                            //Add the account to the accounts dictionary with a default amount at 0 and the choosen currency
-                            customer.accounts.Add(newAccChoice, new List<string>() { 0.0f.ToString(), curchoice.ToLower(), "Personkonto" });
-                            Console.WriteLine($"Account {newAccChoice} was added and it has {customer.accounts[newAccChoice][0]}{customer.accounts[newAccChoice][1]} in it");
+                //Console.WriteLine("Which currency do you want to use? \n Available types of currency:\n kr \n $");
+                //string curchoice = Console.ReadLine();
 
-                            //Logs the information
-                            string sendlog = $"{DateTime.Now}: Account {newAccChoice} was added and it has {customer.accounts[newAccChoice][0]}{customer.accounts[newAccChoice][1]} in it";
-                            Log(customer, sendlog);
+                //Check if the currency is either kr or $ and make it lower case
+                //if (curchoice.ToLower() == "kr" || curchoice == "$")
+                //{
 
-                            break;
+                    //Add the account to the accounts dictionary with a default amount at 0 and the choosen currency
+                    customer.accounts.Add(newAccChoice, new List<string>() { 0.0f.ToString(), curchoice.ToLower(), "Personkonto" });
+                    Console.WriteLine($"Account {newAccChoice} was added and it has {customer.accounts[newAccChoice][0]}{customer.accounts[newAccChoice][1]} in it");
 
-                        } else
-                            Console.WriteLine("Invalid choice, try again");
-                    }
+                    //Logs the information
+                    //string sendlog = $"{DateTime.Now}: Account {newAccChoice} was added and it has {customer.accounts[newAccChoice][0]}{customer.accounts[newAccChoice][1]} in it";
+                    //Log(customer, sendlog);
 
-                    break;
+                    //break;
 
-                }
+                //} // else
+                  //Console.WriteLine("Invalid choice, try again");
+
+
+                //break;
 
             }
 
+            //}
+
         }
 
-        public static void TransferbetweenAccounts(Customer customer) {
+        public static void TransferbetweenAccounts(Customer customer)
+        {
+
+
 
             float transfer;
-            string transferTo = "";
+            string transferTo;
             bool run = true;
 
             Console.Clear();
@@ -354,23 +360,24 @@ namespace BankApplication {
 
         }
 
-        public static void CustomerCreation() {
+        public static void CustomerCreation(string name, string password) {
 
-            Console.WriteLine("\nName:");
-            string name = Console.ReadLine();
+            //Console.WriteLine("\nName:");
+            //name = Console.ReadLine();
 
-            //A character limit between 1-20
-            if (name.Length > 20 || name.Length < 1)
-                Console.WriteLine("The account name needs to be between 1 and 20 characters");
+            //////A character limit between 1-20
+            //if (name.Length > 20 || name.Length < 1)
+            //    Console.WriteLine("The account name needs to be between 1 and 20 characters");
 
-            //Check if the account name already exists
-            else if (Users.customerList.Exists(x => x.Name == name))
-                Console.WriteLine("This account already exists for this user");
+            //////Check if the account name already exists
+            //else if (Users.customerList.Exists(x => x.Name == name))
+            //    Console.WriteLine("This account already exists for this user");
 
-            Console.WriteLine("\nPassword:");
-            string password = Console.ReadLine();
+            //Console.WriteLine("\nPassword:");
+            //password = Console.ReadLine();
 
             //Creates a new customer object and adds it to the customerList
+
             Users.customerList.Add(new Customer(name, password, new Dictionary<string, List<string>>()));
 
         }

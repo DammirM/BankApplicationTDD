@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BankApplication {
 
-    internal class NavigationHandler {
+    public class NavigationHandler {
 
         //Navigation system for admins
         public static void AdminNavigationMenu(Admin admin) {
@@ -25,6 +25,9 @@ namespace BankApplication {
                 if (!byte.TryParse(Console.ReadLine(), out choice))
                     Console.WriteLine("\nNumber 1-3.");
 
+                string name = "";
+                string password = "";
+
                 switch (choice) {
 
                     default: //If not a valid choice
@@ -35,7 +38,7 @@ namespace BankApplication {
                         BankSystem.PressEnter();
                         break;
                     case 2: //Create new customers
-                        BankSystem.CustomerCreation();
+                        BankSystem.CustomerCreation(name,password);
                         BankSystem.PressEnter();
                         break;
                     case 3: //Change exchange rate in USD to SEK
@@ -87,6 +90,9 @@ namespace BankApplication {
                 if (!byte.TryParse(Console.ReadLine(), out choice))
                     Console.WriteLine("\nNumber 1-7.");
 
+                Customer customer;
+                string transferTo, transferFrom, transfer;
+
                 switch (choice) {
 
                     default: //If not a valid choice
@@ -98,7 +104,27 @@ namespace BankApplication {
                         BankSystem.PressEnter();
                         break;
                     case 2: //Open new account
-                        BankSystem.OpenAccount(account);
+                        while (true)
+                        {
+                            
+                            Console.WriteLine("What do you want to name your new account(between 4 and 20 characters)");
+                            string newAccChoice = Console.ReadLine();
+                            if (newAccChoice.Length > 20 || newAccChoice.Length < 4)
+                            {
+                                Console.WriteLine("The account name needs to be between 4 and 20 characters");
+                            }
+
+                            Console.WriteLine("Which currency do you want to use? \n Available types of currency:\n kr \n $");
+                            string curchoice = Console.ReadLine();
+
+                            if (curchoice.ToLower() == "kr" && curchoice == "$")
+                            {
+                                Console.WriteLine("Invalid choice, try again");
+                            }
+
+                            BankSystem.OpenAccount(account, newAccChoice, curchoice);
+                            break;
+                        }
                         BankSystem.PressEnter();
                         break;
                     case 3: //Transfer between accounts
